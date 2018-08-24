@@ -6,7 +6,7 @@ let Issue = new Schema({
     project: {
         type: String
     },
-    start-date: {
+    startDate: {
         type: String 
     },
     purpose: {
