@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-import Issue from './models/Issue';
+import tracker from './models/tracker';
 
 const app = express();
 const router = express.Router();
@@ -11,7 +11,7 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://[server]/issues');
+mongoose.connect('mongodb://[server]/trackers');
 
 const connection = mongoose.connection;
 
@@ -21,57 +21,57 @@ connection.once('open', () => {
 
 // GET method registers an Event handler function
 // which is called each time a HTTP GET request is sent to route
-// Inside function - retrieve all issues in database
-router.route('/issues').get((req, res) => {
-    Issue.find((err, issues) => {
+// Inside function - retrieve all trackers in database
+router.route('/trackers').get((req, res) => {
+    tracker.find((err, trackers) => {
         if (err)
             console.log(err);
         else
-            res.json(issues);
+            res.json(trackers);
     });
 });
 
 // Route sends a HTTP GET request to retrieve
-// a single issue from database in JSON format
-// ID parameter used to specify which issue entry should be returned
-router.route('/issues/:id').get((req, res) => {
-    Issue.findById(req.params.id, (err, issue) => {
+// a single tracker from database in JSON format
+// ID parameter used to specify which tracker entry should be returned
+router.route('/trackers/:id').get((req, res) => {
+    tracker.findById(req.params.id, (err, tracker) => {
         if (err)
             console.log(err);
         else
-            res.json(issue);
+            res.json(tracker);
     })
 });
 
-// Route add new issues via HTTP POST request
-// req.body - creates new Issue object
-// Save method - stores new Issue object in database
-router.route('/issues/add').post((req, res) => {
-    let issue = new Issue(req.body);
-    issue.save()
-        .then(issue => {
-            res.status(200).json({'issue': 'Added successfully'});
+// Route add new trackers via HTTP POST request
+// req.body - creates new tracker object
+// Save method - stores new tracker object in database
+router.route('/trackers/add').post((req, res) => {
+    let tracker = new tracker(req.body);
+    tracker.save()
+        .then(tracker => {
+            res.status(200).json({'tracker': 'Added successfully'});
         })
         .catch(err => {
             res.status(400).send('Failed to create new record');
         });
 });
 
-// Send HTTP POST request to update existing issues
-// findById method - retrieves issue which should be updated from database
+// Send HTTP POST request to update existing tracker
+// findById method - retrieves tracker which should be updated from database
 // Save method stores it in the database
-router.route('/issues/update/:id').post((req, res) => {
-    Issue.findById(req.params.id, (err, issue) => {
-        if (!issue)
+router.route('/trackers/update/:id').post((req, res) => {
+    tracker.findById(req.params.id, (err, tracker) => {
+        if (!tracker)
             return next(new Error('Could not load Document'));
         else {
-            issue.title = req.body.title;
-            issue.responsible = req.body.responsible;
-            issue.description = req.body.description;
-            issue.severity = req.body.severity;
-            issue.status = req.body.status;
+            tracker.title = req.body.title;
+            tracker.responsible = req.body.responsible;
+            tracker.description = req.body.description;
+            tracker.severity = req.body.severity;
+            tracker.status = req.body.status;
 
-            issue.save().then(issue => {
+            tracker.save().then(tracker => {
                 res.json('Update done');
             }).catch(err => {
                 res.status(400).send('Update failed');
@@ -80,10 +80,10 @@ router.route('/issues/update/:id').post((req, res) => {
     });
 });
 
-// Delete existing issue entry from database
+// Delete existing tracker entry from database
 // findByIdAndRemove method expects to parameters
-router.route('/issues/delete/:id').get((req, res) => {
-    Issue.findByIdAndRemove({_id: req.params.id}, (err, issue) => {
+router.route('/trackers/delete/:id').get((req, res) => {
+    tracker.findByIdAndRemove({_id: req.params.id}, (err, tracker) => {
         if (err)
             res.json(err);
         else
