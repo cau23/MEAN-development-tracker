@@ -6,11 +6,8 @@ let tracker = new Schema({
     project: {
         type: String
     },
-    startDate: {
+    date: {
         type: String 
-    },
-    purpose: {
-        type: String
     },
     description: {
         type: String

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TrackerService } from '../../tracker.service';
 
 @Component({
   selector: 'app-edit',
