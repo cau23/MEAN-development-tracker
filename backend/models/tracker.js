@@ -2,15 +2,12 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-let Issue = new Schema({
+let tracker = new Schema({
     project: {
         type: String
     },
-    startDate: {
+    date: {
         type: String 
-    },
-    purpose: {
-        type: String
     },
     description: {
         type: String
@@ -21,4 +18,4 @@ let Issue = new Schema({
     }
 });
 
-export default mongoose.model('Issue', Issue);
+export default mongoose.model('tracker', tracker);
