@@ -33,7 +33,6 @@ uri = 'http://localhost:4000';
       project: project,
       date: date,
       description: description,
-      status: status,
       status: status
     };
     return this.http.post(`${this.uri}/trackers/update/${id}`, tracker);
