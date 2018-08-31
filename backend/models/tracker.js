@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-let tracker = new Schema({
+let Tracker = new Schema({
     project: {
         type: String
     },
@@ -18,4 +18,4 @@ let tracker = new Schema({
     }
 });
 
-export default mongoose.model('tracker', tracker);
+export default mongoose.model('Tracker', Tracker);
