@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
   	.getTrackers()
   	.subscribe((data: Tracker[]) => {
   		this.trackers = data;
-  		console.log('Data requested ... ');
+  		console.log('Data requested ...');
   		console.log(this.trackers);
   	});
   }

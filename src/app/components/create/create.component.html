@@ -1,3 +1,27 @@
-<p>
-  create works!
-</p>
+<<div>
+  <br>
+  <mat-card>
+    <section class="mat-typography">
+      <h3>Create A New Tracker</h3>
+    </section>
+    <mat-divider></mat-divider>
+    <br>
+    <form [formGroup]="createForm" class="create-form">
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Tracker Project" formControlName="project" #project>
+
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Date" formControlName="date" #date>
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <textarea matInput placeholder="Description" formControlName="description" #description></textarea>
+      </mat-form-field>
+      
+      <mat-divider></mat-divider>
+      <br><br>
+      <button mat-raised-button color="accent" routerLink="/list">Back</button>&nbsp;
+      <button type="submit" (click)="addTracker(project.value, date.value, description.value)" [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Save</button>
+    </form>
+  </mat-card>
+</div>
