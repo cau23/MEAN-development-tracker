@@ -47,7 +47,7 @@ router.route('/trackers/:id').get((req, res) => {
 // req.body - creates new tracker object
 // Save method - stores new tracker object in database
 router.route('/trackers/add').post((req, res) => {
-    let tracker = new tracker(req.body);
+    let tracker = new Tracker(req.body);
     tracker.save()
         .then(tracker => {
             res.status(200).json({'tracker': 'Added successfully'});

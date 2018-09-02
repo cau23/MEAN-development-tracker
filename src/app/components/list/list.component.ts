@@ -13,7 +13,7 @@ import { TrackerService } from '../../tracker.service';
 export class ListComponent implements OnInit {
 
 	trackers: Tracker[];
-	displayColumns = ['project', 'date', 'description', 'status', 'actions'];
+	displayedColumns = ['project', 'date', 'description', 'status', 'actions'];
 
   constructor(private trackerService: TrackerService, private router: Router) { }
 
