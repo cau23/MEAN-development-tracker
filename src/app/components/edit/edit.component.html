@@ -26,7 +26,7 @@
         <mat-divider></mat-divider>
         <br><br>
         <button mat-raised-button color="accent" routerLink="/list">Back</button>&nbsp;
-        <button type="submit" (click)="updateTracker(project.value, date.value, description.value, status.value)" [disabled]="updateForm.pristine || updateForm.invalid" mat-raised-button color="primary">Save</button>
+        <button type="button" (click)="updateTracker(project.value, date.value, description.value, status.value)" [disabled]="updateForm.pristine || updateForm.invalid" mat-raised-button color="primary">Save</button>
       </form>
     </mat-card>
 </div>

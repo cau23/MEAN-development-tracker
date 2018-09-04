@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-import tracker from './models/tracker';
+import Tracker from './models/Tracker';
 
 const app = express();
 const router = express.Router();
@@ -16,14 +16,11 @@ mongoose.connect('mongodb://localhost:27017/trackers');
 const connection = mongoose.connection;
 
 connection.once('open', () => {
-	console.log('MongoDB database connection established successfully!');
+    console.log('MongoDB database connection established successfully!');
 });
 
-// GET method registers an Event handler function
-// which is called each time a HTTP GET request is sent to route
-// Inside function - retrieve all trackers in database
 router.route('/trackers').get((req, res) => {
-    tracker.find((err, trackers) => {
+    Tracker.find((err, trackers) => {
         if (err)
             console.log(err);
         else
@@ -31,21 +28,15 @@ router.route('/trackers').get((req, res) => {
     });
 });
 
-// Route sends a HTTP GET request to retrieve
-// a single tracker from database in JSON format
-// ID parameter used to specify which tracker entry should be returned
 router.route('/trackers/:id').get((req, res) => {
-    tracker.findById(req.params.id, (err, tracker) => {
+    Tracker.findById(req.params.id, (err, tracker) => {
         if (err)
             console.log(err);
         else
             res.json(tracker);
-    })
+    });
 });
 
-// Route add new trackers via HTTP POST request
-// req.body - creates new tracker object
-// Save method - stores new tracker object in database
 router.route('/trackers/add').post((req, res) => {
     let tracker = new Tracker(req.body);
     tracker.save()
@@ -57,13 +48,10 @@ router.route('/trackers/add').post((req, res) => {
         });
 });
 
-// Send HTTP POST request to update existing trackers
-// findById method - retrieves tracker which should be updated from database
-// Save method stores it in the database
 router.route('/trackers/update/:id').post((req, res) => {
-    tracker.findById(req.params.id, (err, tracker) => {
+    Tracker.findById(req.params.id, (err, tracker) => {
         if (!tracker)
-            return next(new Error('Could not load Document'));
+            return next(new Error('Could not load document'));
         else {
             tracker.project = req.body.project;
             tracker.date = req.body.date;
@@ -79,17 +67,15 @@ router.route('/trackers/update/:id').post((req, res) => {
     });
 });
 
-// Delete existing tracker entry from database
-// findByIdAndRemove method expects to parameters
 router.route('/trackers/delete/:id').get((req, res) => {
-    tracker.findByIdAndRemove({_id: req.params.id}, (err, tracker) => {
+    Tracker.findByIdAndRemove({_id: req.params.id}, (err, tracker) => {
         if (err)
             res.json(err);
         else
-            res.json('Removed successfully');
-    });
-});
+            res.json('Remove successfully');
+    })
+})
 
 app.use('/', router);
 
-app.listen(4000, () => console.log(`Express server running on port 4000`));
+app.listen(4000, () => console.log('Express server running on port 4000'));
