@@ -10,8 +10,10 @@
         <mat-form-field class="field-full-width">
           <input placeholder="Project" matInput formControlName="project" #project>
         </mat-form-field>
-        <mat-form-field class="field-full-width">
-          <input placeholder="Date" matInput formControlName="date" #date>
+        <mat-form-field>
+          <input matInput [matDatepicker]="date" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+          <mat-datepicker #date></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="field-full-width">
           <textarea placeholder="Description" matInput formControlName="description" #description></textarea>

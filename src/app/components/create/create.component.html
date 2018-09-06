@@ -1,4 +1,4 @@
-<<div>
+<div>
   <br>
   <mat-card>
     <section class="mat-typography">
@@ -9,10 +9,11 @@
     <form [formGroup]="createForm" class="create-form">
       <mat-form-field class="field-full-width">
         <input matInput placeholder="Tracker Project" formControlName="project" #project>
-
       </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Date" formControlName="date" #date>
+      <mat-form-field>
+        <input matInput [matDatepicker]="date" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+        <mat-datepicker #date></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="field-full-width">
         <textarea matInput placeholder="Description" formControlName="description" #description></textarea>
