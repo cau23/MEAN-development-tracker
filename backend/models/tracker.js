@@ -7,7 +7,7 @@ let Tracker = new Schema({
         type: String
     },
     date: {
-        type: String 
+        type: String
     },
     description: {
         type: String
