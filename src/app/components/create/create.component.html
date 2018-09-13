@@ -11,7 +11,7 @@
         <input matInput placeholder="Tracker Project" formControlName="project" #project>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="date" placeholder="Choose a date">
+        <input matInput [matDatepicker]="date" placeholder="Choose a date" formControl="date">
         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
         <mat-datepicker #date></mat-datepicker>
       </mat-form-field>
